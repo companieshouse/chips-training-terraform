@@ -98,7 +98,7 @@ resource "aws_instance" "db_ec2" {
 
   resource "aws_ebs_volume" "u-drive" {
   availability_zone = "eu-west-2a"
-  size = 256
+  size = 500
   type = "gp3"
   encrypted = true
 
