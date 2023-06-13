@@ -10,7 +10,7 @@ region  = "euw2"
 application = "chips-training25"
 environment = "staging"
 # oracle_unqname = "cdev"
-# oracle_sid = "CHIPSTRAINING25 "
+# oracle_sid = "CHIPSTRAINING25"
 
 db_instance_count = 1
 db_instance_size = "r5.16xlarge"
