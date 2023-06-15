@@ -53,7 +53,7 @@ data "vault_generic_secret" "internal_cidrs" {
 }
 
 data "vault_generic_secret" "ec2_data" {
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/db/ec2"
+  path = "applications/${var.aws_account}-${var.aws_region}/chips-training/${var.application}/db/ec2"
 }
 
 data "vault_generic_secret" "kms_keys" {
@@ -111,7 +111,7 @@ data "template_cloudinit_config" "userdata_config" {
 }
 
 data "aws_security_group" "chips_training25_sg" {
-  for_each = toset(var.chips_dba_dev_sg)
+  for_each = toset(var.chips_training25_sg)
   filter {
     name   = "group-name"
     values = [each.value]
