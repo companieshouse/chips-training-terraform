@@ -53,7 +53,7 @@ data "vault_generic_secret" "internal_cidrs" {
 }
 
 data "vault_generic_secret" "ec2_data" {
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/db/ec2"
+  path = "applications/${var.aws_account}-${var.aws_region}/chips-training/${var.application}/db/ec2"
 }
 
 data "vault_generic_secret" "kms_keys" {
