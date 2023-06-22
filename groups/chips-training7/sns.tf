@@ -1,5 +1,5 @@
 resource "aws_sns_topic" "chips-training7_topic" {
-  name = "chips-training7"
+  name = "chips-training7_topic"
 }
 
 resource "aws_sns_topic_subscription" "chips-training7_Subscription" {
