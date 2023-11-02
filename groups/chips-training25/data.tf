@@ -48,6 +48,10 @@ data "aws_ami" "oracle_12" {
   }
 }
 
+data "vault_generic_secret" "netapp_snapcenter_ip" {
+  path = "aws-accounts/network/netapp-snapcenter"
+}
+
 data "vault_generic_secret" "internal_cidrs" {
   path = "aws-accounts/network/internal_cidr_ranges"
 }
