@@ -48,6 +48,10 @@ data "aws_ami" "oracle_12" {
   }
 }
 
+data "vault_generic_secret" "netapp_snapcenter_ip" {
+  path = "aws-accounts/network/netapp-snapcenter"
+}
+
 data "vault_generic_secret" "internal_cidrs" {
   path = "aws-accounts/network/internal_cidr_ranges"
 }
@@ -121,3 +125,6 @@ data "aws_security_group" "chips_training25_sg" {
 data "vault_generic_secret" "chs_subnet" {
   path = "aws-accounts/network/${var.aws_account}/chs/application-subnets"
 }
+
+data "vault_generic_secret" "sns_url" {
+  path = "applications/${var.aws_account}-${var.aws_region}/monitoring"
