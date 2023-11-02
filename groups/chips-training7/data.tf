@@ -121,3 +121,7 @@ data "aws_security_group" "chips_training7_sg" {
 data "vault_generic_secret" "chs_subnet" {
   path = "aws-accounts/network/${var.aws_account}/chs/application-subnets"
 }
+
+data "vault_generic_secret" "sns_url" {
+  path = "applications/${var.aws_account}-${var.aws_region}/monitoring"
+}
