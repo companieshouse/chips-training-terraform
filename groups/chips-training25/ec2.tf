@@ -93,7 +93,7 @@ resource "aws_instance" "db_ec2" {
   tags = merge(
     local.default_tags,
     tomap({
-      "Name"        = format("%s", var.application)
+      "Name"        = format("%s-%02d", var.application, count.index + 1)
       "Domain"      = local.internal_fqdn,
       "UNQNAME"     = var.oracle_unqname,
       "SID"         = var.oracle_sid,
