@@ -1,4 +1,4 @@
-# chips-e2e-pilot
+# chips-training
 Terraform for provisioning the CHIPS training environment.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
