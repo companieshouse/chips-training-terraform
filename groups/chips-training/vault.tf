@@ -1,0 +1,1 @@
+vault-providers/approle
