@@ -1,5 +1,5 @@
 # chips-e2e-pilot
-Terraform for provisioning the CHIPS E2E environment.
+Terraform for provisioning the CHIPS training environment.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -27,11 +27,11 @@ Terraform for provisioning the CHIPS E2E environment.
 
 | Name | Type |
 |------|------|
-| [aws_instance.chips_e2e_pilot](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
-| [aws_route53_record.chips_e2e_pilot](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [aws_security_group.chips_e2e_pilot](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_vpc_security_group_ingress_rule.chips_e2e_pilot_ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
-| [aws_vpc_security_group_egress_rule.chips_e2e_pilot_all_out](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule) | resource |
+| [aws_instance.chips_training](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
+| [aws_route53_record.chips_training](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_security_group.chips_training](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_vpc_security_group_ingress_rule.chips_training_ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
+| [aws_vpc_security_group_egress_rule.chips_training_all_out](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule) | resource |
 | [aws_ami.amzn2-base-ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_ec2_managed_prefix_list.shared_services_management](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ec2_managed_prefix_list) | data source |
 | [aws_subnet.application](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
@@ -92,7 +92,7 @@ This method is no longer in use, but used environment variables `VAULT_ADDR` and
 | <a name="local_common_resource_name"></a> [common_resource_name](#local\_common_resource_name) | Common name format for resources |
 | <a name="local_common_tags"></a> [common_tags](#local\_common_tags) | Common tags to be applied to all resources |
 | <a name="local_dns_zone"></a> [dns_zone](#local\_dns_zone) | The DNS zone for the environment |
-| <a name="local_chips_e2e_pilot_ami_owner_id"></a> [chips_e2e_pilot_ami_owner_id](#local\_chips_e2e_pilot_ami_owner_id) | CHIPS Pilot AMI Owner ID |
+| <a name="local_chips_training_ami_owner_id"></a> [chips_training_ami_owner_id](#local\_chips_training_ami_owner_id) | CHIPS Pilot AMI Owner ID |
 | <a name="local_security_kms_keys_data"></a> [security_kms_keys_data](#local\_security_kms_keys_data) | Security KMS keys data from Vault |
 | <a name="local_security_s3_data"></a> [security_s3_data](#local\_security_s3_data) | Security S3 bucket data from Vault |
 | <a name="local_session_manager_bucket_name"></a> [session_manager_bucket_name](#local\_session_manager_bucket_name) | Session Manager S3 bucket name |
