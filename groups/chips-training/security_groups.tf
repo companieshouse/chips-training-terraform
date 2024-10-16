@@ -24,3 +24,50 @@ resource "aws_vpc_security_group_egress_rule" "chips_training_all_out" {
   ip_protocol       = "-1"
 }
 
+# OEM ingress rules
+
+resource "aws_vpc_security_group_ingress_rule" "oem_admin_ssh" {
+  description       = "Allow SSH connectivity from CHIPS OEM instances in heritage environments"
+  security_group_id = aws_security_group.e5_fin.id
+  cidr_ipv4         = data.vault_generic_secret.oem_monitoring.data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 22
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_ingress_rule" "oem_admin_1521" {
+  description       = "Allow connectivity from CHIPS OEM instances in heritage environments"
+  security_group_id = aws_security_group.e5_fin.id
+  cidr_ipv4         = data.vault_generic_secret.oem_monitoring.data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 1521
+  to_port           = 1521
+}
+
+resource "aws_vpc_security_group_ingress_rule" "oem_admin_1522" {
+  description       = "Allow connectivity from CHIPS OEM instances in heritage environments"
+  security_group_id = aws_security_group.e5_fin.id
+  cidr_ipv4         = data.vault_generic_secret.oem_monitoring.data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 1522
+  to_port           = 1522
+}
+
+resource "aws_vpc_security_group_ingress_rule" "oem_admin_3872" {
+  description       = "Allow connectivity from CHIPS OEM instances in heritage environments"
+  security_group_id = aws_security_group.e5_fin.id
+  cidr_ipv4         = data.vault_generic_secret.oem_monitoring.data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 3872
+  to_port           = 3872
+}
+
+resource "aws_vpc_security_group_ingress_rule" "oem_admin_4903" {
+  description       = "Allow connectivity from CHIPS OEM instances in heritage environments"
+  security_group_id = aws_security_group.e5_fin.id
+  cidr_ipv4         = data.vault_generic_secret.oem_monitoring.data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 4903
+  to_port           = 4903
+}
+
