@@ -8,7 +8,7 @@ dns_zone_suffix = "heritage.aws.internal"
 # Instance details
 
 instance_count = "1"
-instance_type = "t3.medium"
+instance_type = "m4.4xlarge"
 root_volume_size = 100
 service_subtype = "chips-training"
 application_subnet_pattern = "sub-application-*"

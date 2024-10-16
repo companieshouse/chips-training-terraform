@@ -25,12 +25,6 @@ variable "instance_count" {
   default     = 1
 }
 
-variable "root_volume_size" {
-  type        = number
-  description = "The size of the root volume in gibibytes (GiB)."
-  default     = 20
-}
-
 variable "instance_type" {
   type        = string
   description = "The instance type to use for EC2 instances."
@@ -45,7 +39,7 @@ variable "application_subnet_pattern" {
 variable "dns_zone_suffix" {
   type        = string
   description = "The common DNS hosted zone suffix used across accounts."
-  default     = "development.aws.internal"
+  default     = "staging.aws.internal"
 }
 
 variable "default_log_retention_in_days" {
@@ -68,4 +62,35 @@ variable "team" {
   type        = string
   description = "The team name for ownership of this service."
   default     = "Linux & Storage"
+}
+
+# Disk variables
+variable "delete_on_termination" {
+  type        = bool
+  description = "Determines if disks should be deleted on instance termination"
+  default     = false
+}
+
+variable "ebs_encrypted" {
+  type        = bool
+  description = "enable ebs encryption"
+  default     = true
+}
+
+variable "root_volume_size" {
+  type        = number
+  description = "The size of the root volume in gibibytes (GiB)."
+  default     = 20
+}
+
+variable "u01_storage_gb" {
+  type        = number
+  description = "The size of the u01 volume in gibibytes (GiB)."
+  default     = 200
+}
+
+variable "volume_type" {
+  type        = string
+  description = "EBS volume type"
+  default     = "gp3"
 }
