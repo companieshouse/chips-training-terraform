@@ -3,7 +3,7 @@ variable "aws_account" {
   description = "The name of the AWS account in which resources will be provisioned."
 }
 
-variable "region" {
+variable "aws_region" {
   type        = string
   description = "The AWS region in which resources will be created."
 }

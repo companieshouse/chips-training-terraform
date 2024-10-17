@@ -62,5 +62,5 @@ data "vault_generic_secret" "security_kms_keys" {
 }
 
 data "vault_generic_secret" "oem_monitoring" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/oem-ip"
+  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
 }

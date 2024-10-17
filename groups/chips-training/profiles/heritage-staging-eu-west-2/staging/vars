@@ -1,6 +1,7 @@
 # Account details
 
 aws_account = "heritage-staging"
+aws_region  = "eu-west-2"
 environment = "staging"
 
 dns_zone_suffix = "heritage.aws.internal"
