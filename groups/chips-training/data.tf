@@ -35,13 +35,13 @@ data "aws_subnet" "application" {
   id    = tolist(data.aws_subnets.application.ids)[count.index]
 }
 
-data "aws_ami" "rhel8-base-ami" {
+data "aws_ami" "oracle-12-ami" {
   most_recent = true
-  name_regex  = "rhel8-base-\\d.\\d.\\d"
+  name_regex  = "oracle-12-\\d.\\d.\\d"
 
   filter {
     name   = "name"
-    values = ["rhel8-base-${var.ami_version_pattern}"]
+    values = ["oracle-12-${var.ami_version_pattern}"]
   }
 }
 
