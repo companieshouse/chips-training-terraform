@@ -18,7 +18,7 @@ locals {
   ssm_kms_key_id         = local.security_kms_keys_data.session-manager-kms-key-arn
 
   account_ids_secrets = jsondecode(data.vault_generic_secret.account_ids.data_json)
-  chips_training_ami_owner_id = local.account_ids_secrets["shared-services"]
+  chips_training_ami_owner_id = local.account_ids_secrets["heritage-staging"]
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   ebs_kms_key_arn        = local.kms_keys_data["ebs"]
