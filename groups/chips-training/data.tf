@@ -64,3 +64,11 @@ data "vault_generic_secret" "security_kms_keys" {
 data "vault_generic_secret" "oem_monitoring" {
   path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
 }
+
+data "vault_generic_secret" "sns_email" {
+  path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
+}
+
+data "vault_generic_secret" "sns_url" {
+  path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
+}

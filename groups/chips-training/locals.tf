@@ -22,4 +22,7 @@ locals {
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   ebs_kms_key_arn        = local.kms_keys_data["ebs"]
+
+  sns_email_secret = data.vault_generic_secret.sns_email.data
+  linux_sns_email  = local.sns_email_secret["linux-email"]
 }
