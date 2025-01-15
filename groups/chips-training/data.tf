@@ -35,6 +35,10 @@ data "aws_subnet" "application" {
   id    = tolist(data.aws_subnets.application.ids)[count.index]
 }
 
+data "vault_generic_secret" "ami_owner" {
+  path = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+}
+
 data "aws_ami" "oracle-12-ami" {
   most_recent = true
   name_regex  = "oracle-12-\\d.\\d.\\d"
@@ -42,6 +46,11 @@ data "aws_ami" "oracle-12-ami" {
   filter {
     name   = "name"
     values = ["oracle-12-${var.ami_version_pattern}"]
+  }
+
+  filter {
+    name  = "owner-id"
+    values = ["${local.ami_owner_id}"]
   }
 }
 
@@ -71,4 +80,16 @@ data "vault_generic_secret" "sns_email" {
 
 data "vault_generic_secret" "sns_url" {
   path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
+}
+
+data "template_file" "userdata" {
+  template = file("${path.module}/templates/user_data.tpl")
+
+  count = var.instance_count
+
+  vars = { 
+    ENVIRONMENT          = title(var.environment)
+    APPLICATION_NAME     = var.service_subtype
+    ANSIBLE_INPUTS       = jsonencode(merge(local.ansible_inputs, { hostname = format("%s-%02d", var.service_subtype, count.index + 1) }))
+  }
 }
