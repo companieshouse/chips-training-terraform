@@ -25,4 +25,14 @@ locals {
 
   sns_email_secret = data.vault_generic_secret.sns_email.data
   linux_sns_email  = local.sns_email_secret["linux-email"]
+
+  ami_owner = data.vault_generic_secret.ami_owner.data
+  ami_owner_id = local.ami_owner["ami_owner"]
+
+  ansible_inputs = {
+    environment = var.environment
+    region      = var.aws_region
+    fqdn        = "${var.service_subtype}.${var.environment}.${var.dns_zone_suffix}"
+    hostname    = var.service_subtype
+  }
 }
