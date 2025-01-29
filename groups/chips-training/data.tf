@@ -39,13 +39,13 @@ data "vault_generic_secret" "ami_owner" {
   path = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
 }
 
-data "aws_ami" "oracle-12-ami" {
+data "aws_ami" "chips-training-ami" {
   most_recent = true
-  name_regex  = "oracle-12-\\d.\\d.\\d"
+  name_regex  = "chips-training-ami-\\d.\\d.\\d"
 
   filter {
     name   = "name"
-    values = ["oracle-12-${var.ami_version_pattern}"]
+    values = ["chips-training-${var.ami_version_pattern}"]
   }
 
   filter {
