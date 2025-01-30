@@ -71,3 +71,40 @@ resource "aws_vpc_security_group_ingress_rule" "oem_admin_4903" {
   to_port           = 4903
 }
 
+# Staffware RDS ingress
+
+resource "aws_vpc_security_group_ingress_rule" "envt7_stf_rds_1521" {
+  description       = "Allow connectivity from ENVT7 Staffware RDS"
+  security_group_id = aws_security_group.chips_training.id
+  cidr_ipv4         = data.vault_generic_secret.stf_rds.data["envt7swdb"]
+  ip_protocol       = "tcp"
+  from_port         = 1521
+  to_port           = 1521
+}
+
+resource "aws_vpc_security_group_ingress_rule" "envt7_stf_rds_1522" {
+  description       = "Allow connectivity from ENVT7 Staffware RDS"
+  security_group_id = aws_security_group.chips_training.id
+  cidr_ipv4         = data.vault_generic_secret.stf_rds.data["envt7swdb"]
+  ip_protocol       = "tcp"
+  from_port         = 1522
+  to_port           = 1522
+}
+
+resource "aws_vpc_security_group_ingress_rule" "envt25_stf_rds_1521" {
+  description       = "Allow connectivity from ENVT25 Staffware RDS"
+  security_group_id = aws_security_group.chips_training.id
+  cidr_ipv4         = data.vault_generic_secret.stf_rds.data["envt25swdb"]
+  ip_protocol       = "tcp"
+  from_port         = 1521
+  to_port           = 1521
+}
+
+resource "aws_vpc_security_group_ingress_rule" "envt25_stf_rds_1522" {
+  description       = "Allow connectivity from ENVT25 Staffware RDS"
+  security_group_id = aws_security_group.chips_training.id
+  cidr_ipv4         = data.vault_generic_secret.stf_rds.data["envt25swdb"]
+  ip_protocol       = "tcp"
+  from_port         = 1522
+  to_port           = 1522
+}
