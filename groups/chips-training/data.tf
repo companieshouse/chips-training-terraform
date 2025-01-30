@@ -74,6 +74,10 @@ data "vault_generic_secret" "oem_monitoring" {
   path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
 }
 
+data "vault_generic_secret" "stf_rds" {
+  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+}
+
 data "vault_generic_secret" "sns_email" {
   path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
 }
