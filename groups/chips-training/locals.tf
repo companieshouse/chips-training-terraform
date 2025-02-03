@@ -29,6 +29,9 @@ locals {
   ami_owner = data.vault_generic_secret.ami_owner.data
   ami_owner_id = local.ami_owner["ami_owner"]
 
+  iscsi_init = data.vault_generic_secret.iscsi_init.data
+  iscsi_initiator_names = split(",", local.iscsi_init["iscsi-initiator-names"])
+
   ansible_inputs = {
     environment = var.environment
     region      = var.aws_region
