@@ -78,6 +78,10 @@ data "vault_generic_secret" "stf_rds" {
   path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
 }
 
+data "vault_generic_secret" "iscsi_init" {
+  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+}
+
 data "vault_generic_secret" "sns_email" {
   path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
 }
@@ -95,5 +99,6 @@ data "template_file" "userdata" {
     ENVIRONMENT          = title(var.environment)
     APPLICATION_NAME     = var.service_subtype
     ANSIBLE_INPUTS       = jsonencode(merge(local.ansible_inputs, { hostname = format("%s-%02d", var.service_subtype, count.index + 1) }))
+    ISCSI_INITIATOR_NAME = local.iscsi_initiator_names[count.index]
   }
 }
