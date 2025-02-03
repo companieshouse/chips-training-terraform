@@ -45,7 +45,7 @@ data "aws_ami" "chips-training-ami" {
 
   filter {
     name   = "name"
-    values = ["chips-training-ami${var.ami_version_pattern}"]
+    values = ["chips-training-ami-${var.ami_version_pattern}"]
   }
 
   filter {
