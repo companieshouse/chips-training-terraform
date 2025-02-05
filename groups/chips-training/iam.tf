@@ -14,6 +14,26 @@ module "instance_profile" {
       actions = [
         "cloudwatch:PutMetricData"
       ]
+    },
+
+    {
+      sid       = "AllowDescribeTags",
+      effect    = "Allow",
+      resources = ["*"],
+      actions = [
+        "ec2:DescribeTags"
+      ]
+    },
+
+    {
+      sid       = "AllowS3HighLevel",
+      effect    = "Allow",
+      resources = ["*"],
+      actions = [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ]
     }
   ]
 }
