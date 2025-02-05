@@ -12,7 +12,10 @@ resource "aws_instance" "chips_training" {
     Environment    = var.environment
     Service        = var.service
     ServiceSubType = var.service_subtype
-    Team           = var.team  
+    Team           = var.team
+    Backup         = true
+    Domain         = "${var.environment}.${var.dns_zone_suffix}"
+    Hostname       = "${var.service_subtype}-${count.index + 1 }"
   }
 
   root_block_device {

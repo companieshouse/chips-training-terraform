@@ -37,6 +37,5 @@ locals {
     region      = var.aws_region
     fqdn        = "${var.service_subtype}.${var.environment}.${var.dns_zone_suffix}"
     hostname    = "${var.service_subtype}-${var.instance_count + 1}"
-    domain      = var.dns_zone_suffix
   }
 }
