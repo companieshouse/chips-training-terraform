@@ -8,14 +8,14 @@ resource "aws_instance" "chips_training" {
   iam_instance_profile   = module.instance_profile.aws_iam_instance_profile.name
   vpc_security_group_ids = [aws_security_group.chips_training.id]
   tags = {
-    Name           = "${local.common_resource_name}-${count.index + 1}"
+    Name           = format("%s-%02d", local.common_resource_name, count.index + 1)
     Environment    = var.environment
     Service        = var.service
     ServiceSubType = var.service_subtype
     Team           = var.team
     Backup         = true
     Domain         = "${var.environment}.${var.dns_zone_suffix}"
-    Hostname       = "${var.service_subtype}-${count.index + 1 }"
+    Hostname       = format("%s-%02d", var.service_subtype, count.index + 1)
   }
 
   root_block_device {
