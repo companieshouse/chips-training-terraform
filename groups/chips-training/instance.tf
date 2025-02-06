@@ -48,4 +48,6 @@ resource "aws_instance" "chips_training" {
       Team           = var.team
     }
   }
+  
+  user_data = data.template_file.userdata[count.index].rendered
 }
