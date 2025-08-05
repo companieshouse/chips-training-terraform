@@ -20,8 +20,8 @@ locals {
   account_ids_secrets = jsondecode(data.vault_generic_secret.account_ids.data_json)
   chips_training_ami_owner_id = local.account_ids_secrets["heritage-staging"]
 
-  kms_keys_data          = data.vault_generic_secret.kms_keys.data
-  ebs_kms_key_arn        = local.kms_keys_data["ebs"]
+  aws_kms       = nonsensitive(data.vault_generic_secret.aws_kms_key.data)
+  aws_kms_key   = local.aws_kms["ebs"]
 
   sns_email_secret = data.vault_generic_secret.sns_email.data
   linux_sns_email  = local.sns_email_secret["linux-email"]
@@ -31,11 +31,4 @@ locals {
 
   iscsi_init = data.vault_generic_secret.iscsi_init.data
   iscsi_initiator_names = split(",", local.iscsi_init["iscsi-initiator-names"])
-
-  ansible_inputs = {
-    environment = var.environment
-    region      = var.aws_region
-    fqdn        = "${var.service_subtype}.${var.environment}.${var.dns_zone_suffix}"
-    hostname    = "${var.service_subtype}-${var.instance_count + 1}"
-  }
 }

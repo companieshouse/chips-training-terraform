@@ -1,4 +1,4 @@
-# chips-training
+# chips-training-02
 Terraform for provisioning the CHIPS training environment.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

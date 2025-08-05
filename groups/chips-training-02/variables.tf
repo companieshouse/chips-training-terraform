@@ -64,18 +64,18 @@ variable "team" {
   default     = "Linux & Storage"
 }
 
-# Disk variables
-variable "delete_on_termination" {
+variable "oem_monitor" {
   type        = bool
-  description = "Determines if disks should be deleted on instance termination"
+  description = "A boolean value indicating whether to enable OEM monitor or not"
   default     = false
 }
 
-variable "ebs_encrypted" {
-  type        = bool
-  description = "enable ebs encryption"
-  default     = true
-}
+#variable "ssh_master_public_key" {
+#  type        = string
+#  description = "The SSH master public key; EC2 instance connect should be used for regular connectivity."
+#}
+
+# Disk variables
 
 variable "root_volume_size" {
   type        = number
@@ -83,14 +83,97 @@ variable "root_volume_size" {
   default     = 20
 }
 
-variable "u01_storage_gb" {
-  type        = number
-  description = "The size of the u01 volume in gibibytes (GiB)."
-  default     = 200
+variable "encrypt_root_block_device" {
+  default     = true
+  description = "Defines whether the EBS volume should be encrypted with the cluster's KMS key"
+  type        = bool
 }
 
-variable "volume_type" {
-  type        = string
-  description = "EBS volume type"
+variable "root_block_device_iops" {
+  default     = 3000
+  description = "The required IOPS on the EBS volume; 3000 is the gp3 default"
+  type        = number
+}
+
+variable "root_block_device_throughput" {
+  default     = 125
+  description = "The required EBS volume throughput in MiB/s; 125 is the gp3 default"
+  type        = number
+}
+
+variable "root_block_device_volume_type" {
   default     = "gp3"
+  description = "The type of EBS volume to provision"
+  type        = string
+}
+# ----------------------------------------------------------------------
+variable "data_volume_size_gib" {
+  type        = number
+  default     = 20
+  description = "The EC2 instance data volume size in Gibibytes (GiB)"
+}
+
+variable "ebs_device_name" {
+  default     = "/dev/xvdc"
+  description = "The device name for the ebs device"
+  type        = string
+}
+# ----------------------------------------------------------------------
+variable "encrypt_ebs_block_device" {
+  default     = true
+  description = "Defines whether the EBS volume should be encrypted with the cluster's KMS key"
+  type        = bool
+}
+
+variable "ebs_delete_on_termination" {
+  default     = true
+  description = "Defines whether the EBS volume should be deleted on terination"
+  type        = bool
+}
+variable "ebs_block_device_iops" {
+  default     = 3000
+  description = "The required IOPS on the EBS volume; 3000 is the gp3 default"
+  type        = number
+}
+
+variable "ebs_block_device_throughput" {
+  default     = 125
+  description = "The required EBS volume throughput in MiB/s; 125 is the gp3 default"
+  type        = number
+}
+
+variable "ebs_block_device_volume_type" {
+  default     = "gp3"
+  description = "The type of EBS volume to provision"
+  type        = string
+}
+
+variable "ora2_device_name" {
+  default     = "/dev/xvdd"
+  description = "The device name for the ebs device"
+  type        = string
+}
+
+variable "ora3_device_name" {
+  default     = "/dev/xvde"
+  description = "The device name for the ebs device"
+  type        = string
+}
+
+variable "ora4_device_name" {
+  default     = "/dev/xvdf"
+  description = "The device name for the ebs device"
+  type        = string
+}
+
+variable "ora5_device_name" {
+  default     = "/dev/xvdg"
+  description = "The device name for the ebs device"
+  type        = string
+}
+
+variable "ora_volume_size_gib" {
+  type        = number
+  default     = 5
+  description = "The EC2 instance data volume size in Gibibytes (GiB)"
 }
