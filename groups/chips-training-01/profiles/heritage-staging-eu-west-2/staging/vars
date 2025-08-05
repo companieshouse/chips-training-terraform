@@ -1,0 +1,16 @@
+# Account details
+
+aws_account = "heritage-staging"
+aws_region  = "eu-west-2"
+environment = "staging"
+
+dns_zone_suffix = "heritage.aws.internal"
+
+# Instance details
+
+instance_count = "1"
+instance_type = "m6i.2xlarge"
+root_volume_size = 100
+service_subtype = "chips-training-01"
+application_subnet_pattern = "sub-application-*"
+default_log_retention_in_days = "7"
