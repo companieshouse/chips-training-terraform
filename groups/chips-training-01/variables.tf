@@ -106,7 +106,7 @@ variable "root_block_device_volume_type" {
   description = "The type of EBS volume to provision"
   type        = string
 }
-
+# ----------------------------------------------------------------------
 variable "data_volume_size_gib" {
   type        = number
   default     = 20
@@ -118,7 +118,7 @@ variable "ebs_device_name" {
   description = "The device name for the ebs device"
   type        = string
 }
-
+# ----------------------------------------------------------------------
 variable "encrypt_ebs_block_device" {
   default     = true
   description = "Defines whether the EBS volume should be encrypted with the cluster's KMS key"

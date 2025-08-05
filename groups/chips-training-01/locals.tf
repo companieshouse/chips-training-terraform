@@ -20,7 +20,7 @@ locals {
   account_ids_secrets = jsondecode(data.vault_generic_secret.account_ids.data_json)
   chips_training_ami_owner_id = local.account_ids_secrets["heritage-staging"]
 
-  aws_kms       = data.vault_generic_secret.aws_kms_key.data
+  aws_kms       = nonsensitive(data.vault_generic_secret.aws_kms_key.data)
   aws_kms_key   = local.aws_kms["ebs"]
 
   sns_email_secret = data.vault_generic_secret.sns_email.data
