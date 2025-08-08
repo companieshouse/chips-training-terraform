@@ -89,3 +89,7 @@ data "vault_generic_secret" "sns_email" {
 data "vault_generic_secret" "sns_url" {
   path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
 }
+
+data "vault_generic_secret" "master_public_key" {
+  path = "/applications/${var.aws_account}-${var.aws_region}/chips-training/"
+}

@@ -70,11 +70,6 @@ variable "oem_monitor" {
   default     = false
 }
 
-#variable "ssh_master_public_key" {
-#  type        = string
-#  description = "The SSH master public key; EC2 instance connect should be used for regular connectivity."
-#}
-
 # Disk variables
 
 variable "root_volume_size" {

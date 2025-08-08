@@ -31,4 +31,7 @@ locals {
 
   iscsi_init = data.vault_generic_secret.iscsi_init.data
   iscsi_initiator_names = split(",", local.iscsi_init["iscsi-initiator-names"])
+
+  public_key = data.vault_generic_secret.master_public_key.data
+  master_public_key = local.public_key["public_key"]
 }

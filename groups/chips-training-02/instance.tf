@@ -132,7 +132,7 @@ resource "aws_instance" "chips_training_02" {
   }
 
 }
-#resource "aws_key_pair" "master" {
-#  key_name   = "${local.common_resource_name}-master"
-#  public_key = var.ssh_master_public_key
-#}
+resource "aws_key_pair" "master" {
+ key_name   = "${local.common_resource_name}-master"
+ public_key = local.master_public_key
+}
