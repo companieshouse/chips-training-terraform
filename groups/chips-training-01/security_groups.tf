@@ -108,3 +108,25 @@ resource "aws_vpc_security_group_ingress_rule" "envt25_stf_rds_1522" {
   from_port         = 1522
   to_port           = 1522
 }
+
+resource "aws_vpc_security_group_ingress_rule" "snapcenter_81XX" {
+  count = var.snapcenter ? 1 : 0
+    
+  description       = "Allow connectivity from Netapp Snapcenter"
+  security_group_id = aws_security_group.chips_training_01.id
+  cidr_ipv4         = data.vault_generic_secret.netapp_snapcenter[0].data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 8145
+  to_port           = 8146
+}
+
+resource "aws_vpc_security_group_ingress_rule" "snapcenter_433" {
+  count = var.snapcenter ? 1 : 0
+    
+  description       = "Allow connectivity from Netapp Snapcenter"
+  security_group_id = aws_security_group.chips_training_01.id
+  cidr_ipv4         = data.vault_generic_secret.netapp_snapcenter[0].data["ip"]
+  ip_protocol       = "tcp"
+  from_port         = 433
+  to_port           = 433
+}
