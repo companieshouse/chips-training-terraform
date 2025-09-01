@@ -172,3 +172,9 @@ variable "ora_volume_size_gib" {
   default     = 5
   description = "The EC2 instance data volume size in Gibibytes (GiB)"
 }
+
+variable "snapcenter" {
+  type        = bool
+  default     = false
+  description = "Defines whether SnapCenter is used by the instance"
+}
