@@ -120,13 +120,13 @@ resource "aws_vpc_security_group_ingress_rule" "snapcenter_81XX" {
   to_port           = 8146
 }
 
-resource "aws_vpc_security_group_ingress_rule" "snapcenter_433" {
+resource "aws_vpc_security_group_ingress_rule" "snapcenter_22" {
   count = var.snapcenter ? 1 : 0
     
   description       = "Allow connectivity from Netapp Snapcenter"
   security_group_id = aws_security_group.chips_training_02.id
   cidr_ipv4         = data.vault_generic_secret.netapp_snapcenter[0].data["ip"]
   ip_protocol       = "tcp"
-  from_port         = 433
-  to_port           = 433
+  from_port         = 22
+  to_port           = 22
 }
