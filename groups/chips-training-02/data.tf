@@ -66,6 +66,10 @@ data "vault_generic_secret" "security_s3_buckets" {
   path = "aws-accounts/security/s3"
 }
 
+data "vault_generic_secret" "shared_services_s3_buckets" {
+  path = "aws-accounts/shared-services/s3"
+}
+
 data "vault_generic_secret" "security_kms_keys" {
   path = "aws-accounts/security/kms"
 }
