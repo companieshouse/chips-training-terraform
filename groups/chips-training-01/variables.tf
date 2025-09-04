@@ -91,7 +91,7 @@ variable "root_block_device_iops" {
 }
 
 variable "root_block_device_throughput" {
-  default     = 125
+  default     = 250
   description = "The required EBS volume throughput in MiB/s; 125 is the gp3 default"
   type        = number
 }
@@ -132,7 +132,7 @@ variable "ebs_block_device_iops" {
 }
 
 variable "ebs_block_device_throughput" {
-  default     = 125
+  default     = 250
   description = "The required EBS volume throughput in MiB/s; 125 is the gp3 default"
   type        = number
 }
