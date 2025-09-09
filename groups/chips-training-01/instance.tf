@@ -131,6 +131,11 @@ resource "aws_instance" "chips_training_01" {
     }
   }
 
+  metadata_options {
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 2
+  }
+
 }
 resource "aws_key_pair" "master" {
  key_name   = "${local.common_resource_name}-master"
