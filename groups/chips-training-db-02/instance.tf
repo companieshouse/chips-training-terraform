@@ -1,4 +1,4 @@
-resource "aws_instance" "chips_training_02" {
+resource "aws_instance" "chips_training_db_02" {
   count = var.instance_count
 
   ami           = data.aws_ami.chips_training_ami.id
@@ -6,7 +6,7 @@ resource "aws_instance" "chips_training_02" {
   subnet_id     = element(local.application_subnet_ids_by_az, count.index) # use 'element' function for wrap-around behaviour
 
   iam_instance_profile   = module.instance_profile.aws_iam_instance_profile.name
-  vpc_security_group_ids = [aws_security_group.chips_training_02.id]
+  vpc_security_group_ids = [aws_security_group.chips_training_db_02.id]
   tags = {
     Name           = local.common_resource_name
     Environment    = var.environment
