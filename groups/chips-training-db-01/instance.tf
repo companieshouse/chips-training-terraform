@@ -33,105 +33,131 @@ resource "aws_instance" "chips_training_db_01" {
       Team           = var.team
       Backup         = true
     }
-
   }
-
-  ebs_block_device {
-    device_name           = var.ebs_device_name
-    volume_size           = var.data_volume_size_gib
-    encrypted             = var.encrypt_ebs_block_device
-    iops                  = var.ebs_block_device_iops
-    kms_key_id            = local.aws_kms_key
-    throughput            = var.ebs_block_device_throughput
-    volume_type           = var.ebs_block_device_volume_type
-    delete_on_termination = var.ebs_delete_on_termination
-    tags = {
-      Name           = "${local.common_resource_name}-ora1"
-      Environment    = var.environment
-      Service        = var.service
-      ServiceSubType = var.service_subtype
-      Team           = var.team
-      Backup         = false
-    }
-  }
-
-  ebs_block_device {
-    device_name           = var.ora2_device_name
-    volume_size           = var.data_volume_size_gib
-    encrypted             = var.encrypt_ebs_block_device
-    iops                  = var.ebs_block_device_iops
-    kms_key_id            = local.aws_kms_key
-    throughput            = var.ebs_block_device_throughput
-    volume_type           = var.ebs_block_device_volume_type
-    delete_on_termination = var.ebs_delete_on_termination
-    tags = {
-      Name           = "${local.common_resource_name}-ora2"
-      Environment    = var.environment
-      Service        = var.service
-      ServiceSubType = var.service_subtype
-      Team           = var.team
-      Backup         = true
-    }
-  }
-
-  ebs_block_device {
-    device_name           = var.ora3_device_name
-    volume_size           = var.ora_volume_size_gib
-    encrypted             = var.encrypt_ebs_block_device
-    iops                  = var.ebs_block_device_iops
-    kms_key_id            = local.aws_kms_key
-    throughput            = var.ebs_block_device_throughput
-    volume_type           = var.ebs_block_device_volume_type
-    delete_on_termination = var.ebs_delete_on_termination
-    tags = {
-      Name           = "${local.common_resource_name}-ora3"
-      Environment    = var.environment
-      Service        = var.service
-      ServiceSubType = var.service_subtype
-      Team           = var.team
-      Backup         = true
-    }
-  }
-
-  ebs_block_device {
-    device_name           = var.ora4_device_name
-    volume_size           = var.ora_volume_size_gib
-    encrypted             = var.encrypt_ebs_block_device
-    iops                  = var.ebs_block_device_iops
-    kms_key_id            = local.aws_kms_key
-    throughput            = var.ebs_block_device_throughput
-    volume_type           = var.ebs_block_device_volume_type
-    delete_on_termination = var.ebs_delete_on_termination
-    tags = {
-      Name           = "${local.common_resource_name}-ora4"
-      Environment    = var.environment
-      Service        = var.service
-      ServiceSubType = var.service_subtype
-      Team           = var.team
-      Backup         = true
-    }
-  }
-
-  ebs_block_device {
-    device_name           = var.ora5_device_name
-    volume_size           = var.ora_volume_size_gib
-    encrypted             = var.encrypt_ebs_block_device
-    iops                  = var.ebs_block_device_iops
-    kms_key_id            = local.aws_kms_key
-    throughput            = var.ebs_block_device_throughput
-    volume_type           = var.ebs_block_device_volume_type
-    delete_on_termination = var.ebs_delete_on_termination
-    tags = {
-      Name           = "${local.common_resource_name}-ora5"
-      Environment    = var.environment
-      Service        = var.service
-      ServiceSubType = var.service_subtype
-      Team           = var.team
-      Backup         = true
-    }
-  }
-
 }
+
+resource "aws_ebs_volume" "ora1" {
+  availability_zone = aws_instance.chips_training_db_01[0].availability_zone
+  size              = var.ora_volume_size_gib
+  encrypted         = var.encrypt_ebs_block_device
+  iops              = var.ebs_block_device_iops
+  kms_key_id        = local.aws_kms_key
+  throughput        = var.ebs_block_device_throughput
+  type              = var.ebs_block_device_volume_type
+  tags = {
+    Name           = "${local.common_resource_name}-ora1"
+    Environment    = var.environment
+    Service        = var.service
+    ServiceSubType = var.service_subtype
+    Team           = var.team
+    Backup         = true
+  }
+}
+
+resource "aws_volume_attachment" "ora1_att" {
+  device_name = var.ora1_device_name
+  volume_id   = aws_ebs_volume.ora1.id
+  instance_id = aws_instance.chips_training_db_01[0].id
+}
+
+
+resource "aws_ebs_volume" "ora2" {
+  availability_zone = aws_instance.chips_training_db_01[0].availability_zone
+  size              = var.ora_volume_size_gib
+  encrypted         = var.encrypt_ebs_block_device
+  iops              = var.ebs_block_device_iops
+  kms_key_id        = local.aws_kms_key
+  throughput        = var.ebs_block_device_throughput
+  type              = var.ebs_block_device_volume_type
+  tags = {
+    Name           = "${local.common_resource_name}-ora2"
+    Environment    = var.environment
+    Service        = var.service
+    ServiceSubType = var.service_subtype
+    Team           = var.team
+    Backup         = true
+  }
+}
+
+resource "aws_volume_attachment" "ora2_att" {
+  device_name = var.ora2_device_name
+  volume_id = aws_ebs_volume.ora2.id
+  instance_id = aws_instance.chips_training_db_01[0].id
+}
+
+
+resource "aws_ebs_volume" "ora3" {
+  availability_zone = aws_instance.chips_training_db_01[0].availability_zone
+  size              = var.crs_volume_size_gib
+  encrypted         = var.encrypt_ebs_block_device
+  iops              = var.ebs_block_device_iops
+  kms_key_id        = local.aws_kms_key
+  throughput        = var.ebs_block_device_throughput
+  type              = var.ebs_block_device_volume_type
+  tags = {
+    Name           = "${local.common_resource_name}-ora3"
+    Environment    = var.environment
+    Service        = var.service
+    ServiceSubType = var.service_subtype
+    Team           = var.team
+    Backup         = true
+  }
+}
+
+resource "aws_volume_attachment" "ora3_att" {
+  device_name = var.ora3_device_name
+  volume_id = aws_ebs_volume.ora3.id
+  instance_id = aws_instance.chips_training_db_01[0].id
+}
+
+resource "aws_ebs_volume" "ora4" {
+  availability_zone = aws_instance.chips_training_db_01[0].availability_zone
+  size              = var.crs_volume_size_gib
+  encrypted         = var.encrypt_ebs_block_device
+  iops              = var.ebs_block_device_iops
+  kms_key_id        = local.aws_kms_key
+  throughput        = var.ebs_block_device_throughput
+  type              = var.ebs_block_device_volume_type
+  tags = {
+    Name           = "${local.common_resource_name}-ora4"
+    Environment    = var.environment
+    Service        = var.service
+    ServiceSubType = var.service_subtype
+    Team           = var.team
+    Backup         = true
+  }
+}
+
+resource "aws_volume_attachment" "ora4_att" {
+  device_name = var.ora4_device_name
+  volume_id = aws_ebs_volume.ora4.id
+  instance_id = aws_instance.chips_training_db_01[0].id
+}
+
+resource "aws_ebs_volume" "ora5" {
+  availability_zone = aws_instance.chips_training_db_01[0].availability_zone
+  size              = var.crs_volume_size_gib
+  encrypted         = var.encrypt_ebs_block_device
+  iops              = var.ebs_block_device_iops
+  kms_key_id        = local.aws_kms_key
+  throughput        = var.ebs_block_device_throughput
+  type              = var.ebs_block_device_volume_type
+  tags = {
+    Name           = "${local.common_resource_name}-ora5"
+    Environment    = var.environment
+    Service        = var.service
+    ServiceSubType = var.service_subtype
+    Team           = var.team
+    Backup         = true
+  }
+}
+
+resource "aws_volume_attachment" "ora5_att" {
+  device_name = var.ora5_device_name
+  volume_id = aws_ebs_volume.ora5.id
+  instance_id = aws_instance.chips_training_db_01[0].id
+}
+
 resource "aws_key_pair" "master" {
  key_name   = "${local.common_resource_name}-master"
  public_key = local.master_public_key
