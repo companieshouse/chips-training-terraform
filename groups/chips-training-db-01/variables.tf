@@ -70,8 +70,14 @@ variable "oem_monitor" {
   default     = false
 }
 
-# Disk variables
+variable "snapcenter" {
+  type        = bool
+  default     = false
+  description = "Defines whether SnapCenter is used by the instance"
+}
 
+# Disk variables
+# ----------------------------------------------------------------------
 variable "root_volume_size" {
   type        = number
   description = "The size of the root volume in gibibytes (GiB)."
@@ -99,18 +105,6 @@ variable "root_block_device_throughput" {
 variable "root_block_device_volume_type" {
   default     = "gp3"
   description = "The type of EBS volume to provision"
-  type        = string
-}
-# ----------------------------------------------------------------------
-variable "data_volume_size_gib" {
-  type        = number
-  default     = 20
-  description = "The EC2 instance data volume size in Gibibytes (GiB)"
-}
-
-variable "ebs_device_name" {
-  default     = "/dev/xvdc"
-  description = "The device name for the ebs device"
   type        = string
 }
 # ----------------------------------------------------------------------
@@ -142,6 +136,24 @@ variable "ebs_block_device_volume_type" {
   description = "The type of EBS volume to provision"
   type        = string
 }
+# ----------------------------------------------------------------------
+variable "ora_volume_size_gib" {
+  type        = number
+  default     = 20
+  description = "The EC2 instance data volume size in Gibibytes (GiB)"
+}
+
+variable "crs_volume_size_gib" {
+  type        = number
+  default     = 5
+  description = "The EC2 instance data volume size in Gibibytes (GiB)"
+}
+# ----------------------------------------------------------------------
+variable "ora1_device_name" {
+  default     = "/dev/xvdc"
+  description = "The device name for the ebs device"
+  type        = string
+}
 
 variable "ora2_device_name" {
   default     = "/dev/xvdd"
@@ -165,16 +177,4 @@ variable "ora5_device_name" {
   default     = "/dev/xvdg"
   description = "The device name for the ebs device"
   type        = string
-}
-
-variable "ora_volume_size_gib" {
-  type        = number
-  default     = 5
-  description = "The EC2 instance data volume size in Gibibytes (GiB)"
-}
-
-variable "snapcenter" {
-  type        = bool
-  default     = false
-  description = "Defines whether SnapCenter is used by the instance"
 }
