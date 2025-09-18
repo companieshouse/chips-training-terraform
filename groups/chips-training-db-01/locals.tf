@@ -37,4 +37,18 @@ locals {
 
   public_key = data.vault_generic_secret.master_public_key.data
   master_public_key = local.public_key["public_key"]
+
+  root_disk_device = "nvme1n1p4"
+  
+  ebs_info = {
+    ebs_u01 = {
+      device = "mapper/vol.oracle.u01-lv.oracle_u01"
+      path   = "u01"
+    }
+    ebs_u02 = {
+      device = "mapper/vol.oracle.u02-lv.oracle_u02"
+      path   = "/u02"
+    }
+  }
+  
 }

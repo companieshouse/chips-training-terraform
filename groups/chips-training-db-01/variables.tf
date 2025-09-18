@@ -78,6 +78,18 @@ variable "snapcenter" {
 
 # Disk variables
 # ----------------------------------------------------------------------
+
+variable "disk_fs_type" {
+  default     = "xfs"
+  description = "Default filesytem type for root/ebs block devices"
+  type        = string
+}
+
+variable "root_disk_attachment" {
+  default     = "/"
+  description = "Filesystem attachment point for root disk"
+  type        = string
+}
 variable "root_volume_size" {
   type        = number
   description = "The size of the root volume in gibibytes (GiB)."
