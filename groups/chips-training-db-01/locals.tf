@@ -38,7 +38,7 @@ locals {
   public_key = data.vault_generic_secret.master_public_key.data
   master_public_key = local.public_key["public_key"]
 
-  root_disk_device = "nvme1n1p4"
+  root_disk_device = "nvme0n1p4"
   
   ebs_info = {
     ebs_u01 = {
