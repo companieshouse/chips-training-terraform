@@ -16,7 +16,7 @@ locals {
   
   s3_shared_resources_data = data.vault_generic_secret.shared_services_s3_buckets.data
   shared_resources_bucket_name = local.s3_shared_resources_data.resources_bucket_name
-
+  
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data
   ssm_kms_key_id         = local.security_kms_keys_data.session-manager-kms-key-arn
 
@@ -37,4 +37,18 @@ locals {
 
   public_key = data.vault_generic_secret.master_public_key.data
   master_public_key = local.public_key["public_key"]
+
+  root_disk_device = "nvme0n1p4"
+  
+  ebs_info = {
+    ebs_u01 = {
+      device = "mapper/vol.oracle.u01-lv.oracle_u01"
+      path   = "u01"
+    }
+    ebs_u02 = {
+      device = "mapper/vol.oracle.u02-lv.oracle_u02"
+      path   = "/u02"
+    }
+  }
+  
 }
