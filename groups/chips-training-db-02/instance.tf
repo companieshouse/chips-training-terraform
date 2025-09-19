@@ -86,7 +86,7 @@ resource "aws_volume_attachment" "ora2_att" {
 }
 
 
-resource "aws_ebs_volume" "ora3" {
+resource "aws_ebs_volume" "ora_crs1" {
   availability_zone = aws_instance.chips_training_db_02[0].availability_zone
   size              = var.crs_volume_size_gib
   encrypted         = var.encrypt_ebs_block_device
@@ -95,7 +95,7 @@ resource "aws_ebs_volume" "ora3" {
   throughput        = var.ebs_block_device_throughput
   type              = var.ebs_block_device_volume_type
   tags = {
-    Name           = "${local.common_resource_name}-ora3"
+    Name           = "${local.common_resource_name}-ora_crs1"
     Environment    = var.environment
     Service        = var.service
     ServiceSubType = var.service_subtype
@@ -104,13 +104,13 @@ resource "aws_ebs_volume" "ora3" {
   }
 }
 
-resource "aws_volume_attachment" "ora3_att" {
+resource "aws_volume_attachment" "ora_crs1_att" {
   device_name = var.ora3_device_name
-  volume_id = aws_ebs_volume.ora3.id
+  volume_id = aws_ebs_volume.ora_crs1.id
   instance_id = aws_instance.chips_training_db_02[0].id
 }
 
-resource "aws_ebs_volume" "ora4" {
+resource "aws_ebs_volume" "ora_crs2" {
   availability_zone = aws_instance.chips_training_db_02[0].availability_zone
   size              = var.crs_volume_size_gib
   encrypted         = var.encrypt_ebs_block_device
@@ -119,7 +119,7 @@ resource "aws_ebs_volume" "ora4" {
   throughput        = var.ebs_block_device_throughput
   type              = var.ebs_block_device_volume_type
   tags = {
-    Name           = "${local.common_resource_name}-ora4"
+    Name           = "${local.common_resource_name}-ora_crs2"
     Environment    = var.environment
     Service        = var.service
     ServiceSubType = var.service_subtype
@@ -128,13 +128,13 @@ resource "aws_ebs_volume" "ora4" {
   }
 }
 
-resource "aws_volume_attachment" "ora4_att" {
+resource "aws_volume_attachment" "ora_crs2_att" {
   device_name = var.ora4_device_name
-  volume_id = aws_ebs_volume.ora4.id
+  volume_id = aws_ebs_volume.ora_crs2.id
   instance_id = aws_instance.chips_training_db_02[0].id
 }
 
-resource "aws_ebs_volume" "ora5" {
+resource "aws_ebs_volume" "ora_crs3" {
   availability_zone = aws_instance.chips_training_db_02[0].availability_zone
   size              = var.crs_volume_size_gib
   encrypted         = var.encrypt_ebs_block_device
@@ -143,7 +143,7 @@ resource "aws_ebs_volume" "ora5" {
   throughput        = var.ebs_block_device_throughput
   type              = var.ebs_block_device_volume_type
   tags = {
-    Name           = "${local.common_resource_name}-ora5"
+    Name           = "${local.common_resource_name}-ora_crs3"
     Environment    = var.environment
     Service        = var.service
     ServiceSubType = var.service_subtype
@@ -152,9 +152,9 @@ resource "aws_ebs_volume" "ora5" {
   }
 }
 
-resource "aws_volume_attachment" "ora5_att" {
+resource "aws_volume_attachment" "ora_crs3_att" {
   device_name = var.ora5_device_name
-  volume_id = aws_ebs_volume.ora5.id
+  volume_id = aws_ebs_volume.ora_crs3.id
   instance_id = aws_instance.chips_training_db_02[0].id
 }
 
