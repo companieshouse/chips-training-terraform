@@ -198,7 +198,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_root" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "0"
-  alarm_description   = "Throughput exceeded for volume ORA1 on${var.service_subtype}"
+  alarm_description   = "Throughput exceeded for root volume"
   alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_02.arn]
 
@@ -217,7 +217,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora1" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "0"
-  alarm_description   = "Throughput exceeded for volume ORA1 on${var.service_subtype}"
+  alarm_description   = "Throughput exceeded for volume ora1"
   alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_02.arn]
 
@@ -236,7 +236,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora2" {
   period              = "60"
   statistic           = "Maximum"
   threshold           = "0"
-  alarm_description   = "Throughput exceeded for volume ORA2"
+  alarm_description   = "Throughput exceeded for volume ora2"
   alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_02.arn]
 
