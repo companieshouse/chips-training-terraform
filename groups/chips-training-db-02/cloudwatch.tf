@@ -186,3 +186,73 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_u02_disk_space_warn
     InstanceType      = var.instance_type
   }
 }
+
+# --------------------------------------------------------------------------------------
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_root" {
+
+  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-02 - EBS Throughput Exceeded (root)"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "VolumeThroughputExceededCheck"
+  namespace           = "AWS/EBS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = "0"
+  alarm_description   = "Throughput exceeded for volume ORA1 on${var.service_subtype}"
+  alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_02.arn]
+
+  dimensions = {
+    VolumeId = aws_instance.chips_training_db_02[0].root_block_device[0].volume_id
+    } 
+}
+
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora1" {
+
+  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-02 - EBS Throughput Exceeded u01)"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "VolumeThroughputExceededCheck"
+  namespace           = "AWS/EBS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = "0"
+  alarm_description   = "Throughput exceeded for volume ORA1 on${var.service_subtype}"
+  alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_02.arn]
+
+  dimensions = {
+    VolumeId = aws_ebs_volume.ora1.id
+    } 
+}
+
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora2" {
+
+  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-02 - EBS Throughput Exceeded u02)"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "VolumeThroughputExceededCheck"
+  namespace           = "AWS/EBS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = "0"
+  alarm_description   = "Throughput exceeded for volume ORA2"
+  alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_02.arn]
+
+  dimensions = {
+    VolumeId = aws_ebs_volume.ora2.id
+    } 
+}
+
+resource "aws_cloudwatch_composite_alarm" "chips_training_db_02_composite_volume_throughput" {
+  alarm_name = "${upper(var.environment)} - INFO - chips-training-02 - EBS Throughput Composite)"
+  alarm_rule = <<EOF
+    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_02_vtx_root.alarm_name}) OR
+    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_02_vtx_ora1.alarm_name}) OR
+    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_02_vtx_ora2.alarm_name})
+    EOF
+  
+  alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_02.arn] 
+}
