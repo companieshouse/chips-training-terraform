@@ -144,7 +144,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_u01_space_warn" {
 
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_u02_disk_space_crit" {
-  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-02 - /u02-disk-space"
+  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-db-02 - /u02-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -190,7 +190,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_u02_disk_space_warn
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_root" {
 
-  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-02 - EBS Throughput Exceeded (root)"
+  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-db-02 - EBS Throughput Exceeded (root)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "VolumeThroughputExceededCheck"
@@ -204,12 +204,13 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_root" {
 
   dimensions = {
     VolumeId = aws_instance.chips_training_db_02[0].root_block_device[0].volume_id
+    InstanceId = aws_instance.chips_training_db_02[0].id
     } 
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora1" {
 
-  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-02 - EBS Throughput Exceeded u01)"
+  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-db-02 - EBS Throughput Exceeded u01)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "VolumeThroughputExceededCheck"
@@ -223,12 +224,13 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora1" {
 
   dimensions = {
     VolumeId = aws_ebs_volume.ora1.id
+    InstanceId = aws_instance.chips_training_db_02[0].id
     } 
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora2" {
 
-  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-02 - EBS Throughput Exceeded u02)"
+  alarm_name          = "${upper(var.environment)} - CRIT - chips-training-db-02 - EBS Throughput Exceeded u02)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "VolumeThroughputExceededCheck"
@@ -242,6 +244,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora2" {
 
   dimensions = {
     VolumeId = aws_ebs_volume.ora2.id
+    InstanceId = aws_instance.chips_training_db_02[0].id
     } 
 }
 

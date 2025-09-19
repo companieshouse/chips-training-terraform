@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_StatusCheckFailed" {
-  alarm_name                = "${upper(var.environment)} - CRITICAL - chips-training-01-StatusCheckFailed"
+  alarm_name                = "${upper(var.environment)} - CRITICAL - chips-training-db-01-StatusCheckFailed"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "StatusCheckFailed"
@@ -17,7 +17,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_StatusCheckFailed" 
 }
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_cpu95" {
-  alarm_name                = "${upper(var.environment)} - CRITICAL - chips-training-01-CPUUtilization"
+  alarm_name                = "${upper(var.environment)} - CRITICAL - chips-training-db-01 - CPUUtilization"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "CPUUtilization"
@@ -35,7 +35,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_cpu95" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_cpu75" {
-  alarm_name                = "${upper(var.environment)} - WARNING - chips-training-01-CPUUtilization"
+  alarm_name                = "${upper(var.environment)} - WARNING - chips-training-db-01 - CPUUtilization"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "CPUUtilization"
@@ -54,7 +54,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_cpu75" {
 
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_root_disk_space_crit" {
-  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-01-root-disk-space"
+  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-db-01 - root-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -76,7 +76,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_root_disk_space_cri
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_root_disk_space_warn" {
-  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-01-root-disk-space"
+  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - root-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -99,7 +99,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_root_disk_space_war
 
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u01_space_crit" {
-  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-01-u01-disk-space"
+  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-db-01 - /u01-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -121,7 +121,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u01_space_crit" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u01_space_warn" {
-  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-01-u01-disk-space"
+  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - /u01-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -143,8 +143,8 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u01_space_warn" {
 }
 
 # --------------------------------------------------------------------------------------
-resource "aws_cloudwatch_metric_alarm" "chips_training_db_u02_disk_space_crit" {
-  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-01-u02-disk-space"
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u02_disk_space_crit" {
+  alarm_name          = "${upper(var.environment)} - CRITICAL - chips-training-db-01 - /u02-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -166,7 +166,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_u02_disk_space_crit" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u02_disk_space_warn" {
-  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-01-u02-disk-space"
+  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - /u02-disk-space"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   metric_name         = "disk_used_percent"
   namespace           = "CWAgent"
@@ -187,3 +187,75 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u02_disk_space_warn
   }
 }
 
+# --------------------------------------------------------------------------------------
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_root" {
+
+  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Exceeded (root)"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "VolumeThroughputExceededCheck"
+  namespace           = "AWS/EBS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = "0"
+  alarm_description   = "Throughput exceeded for root volume"
+  alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
+
+  dimensions = {
+    VolumeId = aws_instance.chips_training_db_01[0].root_block_device[0].volume_id
+    InstanceId = aws_instance.chips_training_db_01[0].id
+    } 
+}
+
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora1" {
+
+  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Exceeded u01)"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "VolumeThroughputExceededCheck"
+  namespace           = "AWS/EBS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = "0"
+  alarm_description   = "Throughput exceeded for volume ora1"
+  alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
+
+  dimensions = {
+    VolumeId = aws_ebs_volume.ora1.id
+    InstanceId = aws_instance.chips_training_db_01[0].id
+    } 
+}
+
+resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora2" {
+
+  alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Exceeded u02)"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "VolumeThroughputExceededCheck"
+  namespace           = "AWS/EBS"
+  period              = "60"
+  statistic           = "Maximum"
+  threshold           = "0"
+  alarm_description   = "Throughput exceeded for volume ora2"
+  alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
+
+  dimensions = {
+    VolumeId = aws_ebs_volume.ora2.id
+    InstanceId = aws_instance.chips_training_db_01[0].id
+    } 
+}
+
+resource "aws_cloudwatch_composite_alarm" "chips_training_db_01_composite_volume_throughput" {
+  alarm_name = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Composite)"
+  alarm_rule = <<EOF
+    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_root.alarm_name}) OR
+    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_ora1.alarm_name}) OR
+    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_ora2.alarm_name})
+    EOF
+  
+  alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
+  ok_actions          = [aws_sns_topic.chips_training_db_01.arn] 
+}
