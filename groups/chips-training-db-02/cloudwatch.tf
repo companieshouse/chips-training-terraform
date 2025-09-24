@@ -247,15 +247,3 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora2" {
     InstanceId = aws_instance.chips_training_db_02[0].id
     } 
 }
-
-resource "aws_cloudwatch_composite_alarm" "chips_training_db_02_composite_volume_throughput" {
-  alarm_name = "${upper(var.environment)} - WARNING - chips-training-db-02 - EBS Throughput Composite"
-  alarm_rule = join(" OR ", tolist([
-    "ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_02_vtx_root.id})",
-    "ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_02_vtx_ora1.id})",
-    "ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_02_vtx_ora2.id})"
-  ]))
-  
-  alarm_actions       = [aws_sns_topic.chips_training_db_02.arn]
-  ok_actions          = [aws_sns_topic.chips_training_db_02.arn] 
-}
