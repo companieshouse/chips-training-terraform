@@ -250,11 +250,11 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora2" {
 
 resource "aws_cloudwatch_composite_alarm" "chips_training_db_01_composite_volume_throughput" {
   alarm_name = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Composite)"
-  alarm_rule = <<EOF
-    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_root.alarm_name}) OR
-    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_ora1.alarm_name}) OR
-    ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_ora2.alarm_name})
-    EOF
+  alarm_rule = join(" OR ", tolist([
+    "ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_root.id})",
+    "ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_ora1.id})",
+    "ALARM(${aws_cloudwatch_metric_alarm.chips_training_db_01_vtx_ora2.id})"
+  ]))
   
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn] 
