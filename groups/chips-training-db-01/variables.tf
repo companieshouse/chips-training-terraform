@@ -76,6 +76,17 @@ variable "snapcenter" {
   description = "Defines whether SnapCenter is used by the instance"
 }
 
+variable "db_env" {
+  type        = list(string)
+  description = "List of DB environment names"
+}
+
+variable "origin" {
+  type        = string
+  description = "Github Repository where instance code resides"
+  default     = ""
+}
+
 # Disk variables
 # ----------------------------------------------------------------------
 
