@@ -160,7 +160,7 @@ resource "aws_volume_attachment" "ora_crs3_att" {
   instance_id = aws_instance.chips_training_db_02[0].id
 }
 
-resource "aws_key_pair" "master" {
- key_name   = "${local.common_resource_name}-master"
- public_key = local.master_public_key
+resource "aws_key_pair" "chips_training_db" {
+ key_name   = "${local.common_resource_name}-chips-training-db"
+ public_key = chips_training_db.master_public_key
 }
