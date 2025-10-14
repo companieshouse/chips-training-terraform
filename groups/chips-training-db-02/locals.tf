@@ -32,7 +32,7 @@ locals {
   ami_owner = data.vault_generic_secret.ami_owner.data
   ami_owner_id = local.ami_owner["ami_owner"]
 
-  public_key = nonsensitive(data.vault_generic_secret.master_public_key.data)
+  public_key = nonsensitive(data.vault_generic_secret.public_key.data)
   chips_training_public_key = base64decode(local.public_key["public_key"])
 
   root_disk_device = "nvme0n1p4"
