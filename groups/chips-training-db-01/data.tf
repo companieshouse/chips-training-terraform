@@ -40,7 +40,7 @@ data "aws_subnet" "application" {
 }
 
 data "vault_generic_secret" "ami_owner" {
-  path = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/data"
 }
 
 data "aws_ami" "chips_training_ami" {
@@ -75,15 +75,11 @@ data "vault_generic_secret" "security_kms_keys" {
 }
 
 data "vault_generic_secret" "oem_monitoring" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path  = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/data"
 }
 
 data "vault_generic_secret" "stf_rds" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
-}
-
-data "vault_generic_secret" "iscsi_init" {
-  path  = "/applications/${var.aws_account}-${var.aws_region}/chips-training"
+  path  = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/data"
 }
 
 data "vault_generic_secret" "sns_email" {
@@ -94,8 +90,8 @@ data "vault_generic_secret" "sns_url" {
   path = "/applications/${var.aws_account}-${var.aws_region}/monitoring"
 }
 
-data "vault_generic_secret" "master_public_key" {
-  path = "/applications/${var.aws_account}-${var.aws_region}/chips-training/"
+data "vault_generic_secret" "public_key" {
+  path = "/applications/${var.aws_account}-${var.aws_region}/${var.service}/data"
 }
 
 data "vault_generic_secret" "netapp_snapcenter" {
