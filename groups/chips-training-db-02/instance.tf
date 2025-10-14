@@ -4,6 +4,7 @@ resource "aws_instance" "chips_training_db_02" {
   ami           = data.aws_ami.chips_training_ami.id
   instance_type = var.instance_type
   subnet_id     = element(local.application_subnet_ids_by_az, count.index) # use 'element' function for wrap-around behaviour
+    key_name      = aws_key_pair.chips_training_db_02.key_name
 
   iam_instance_profile   = module.instance_profile.aws_iam_instance_profile.name
   vpc_security_group_ids = [aws_security_group.chips_training_db_02.id]
@@ -160,7 +161,7 @@ resource "aws_volume_attachment" "ora_crs3_att" {
   instance_id = aws_instance.chips_training_db_02[0].id
 }
 
-resource "aws_key_pair" "chips_training_db" {
+resource "aws_key_pair" "chips_training_db_02" {
  key_name   = "${local.common_resource_name}-public-key"
- public_key = local.chips_training_public_key
+ public_key = local.chips_training_db_02_public_key
 }
