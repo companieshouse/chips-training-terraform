@@ -161,6 +161,6 @@ resource "aws_volume_attachment" "ora_crs3_att" {
 }
 
 resource "aws_key_pair" "chips_training_db" {
- key_name   = "${local.common_resource_name}-chips-training-db"
+ key_name   = "${local.common_resource_name}-public-key"
  public_key = chips_training_db.master_public_key
 }
