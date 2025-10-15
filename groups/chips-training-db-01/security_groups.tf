@@ -139,3 +139,4 @@ resource "aws_vpc_security_group_ingress_rule" "snapcenter_22" {
   from_port         = 22
   to_port           = 22
 }
+
