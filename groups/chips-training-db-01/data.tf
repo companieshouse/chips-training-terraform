@@ -2,6 +2,10 @@ data "aws_ec2_managed_prefix_list" "shared_services_management" {
   name = "shared-services-management-cidrs"
 }
 
+data "aws_ec2_managed_prefix_list" "administration_cidr_ranges" {
+  name = "administration-cidr-ranges"
+}
+
 data "vault_generic_secret" "aws_kms_key" {
   path = "aws-accounts/${var.aws_account}/kms"
 }
