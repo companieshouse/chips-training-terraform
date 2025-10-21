@@ -21,10 +21,11 @@ module "instance_profile" {
     },
 
     {
-      sid       = "AllowDescribeTags",
+      sid       = "AllowDescribe",
       effect    = "Allow",
       resources = ["*"],
       actions = [
+        "ec2:DescribeInstances",
         "ec2:DescribeTags"
       ]
     },
