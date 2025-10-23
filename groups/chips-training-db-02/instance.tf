@@ -15,7 +15,7 @@ resource "aws_instance" "chips_training_db_02" {
     ServiceSubType = var.service_subtype
     Team           = var.team
     Backup         = true
-    Domain         = local.dns_zone
+    Zone           = local.dns_zone
     Hostname       = var.service_subtype
     ENVTs          = join(", ", var.db_env)
     Repository     = var.origin
