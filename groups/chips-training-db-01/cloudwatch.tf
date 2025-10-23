@@ -8,6 +8,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_StatusCheckFailed" 
   statistic                 = "Maximum"
   threshold                 = "1"
   alarm_description         = "This metric monitors StatusCheckFailed"
+  actions_enabled           = var.monitoring
   insufficient_data_actions = []
   alarm_actions             = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions                = [aws_sns_topic.chips_training_db_01.arn]
@@ -26,6 +27,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_cpu95" {
   statistic                 = "Maximum"
   threshold                 = "95"
   alarm_description         = "This metric monitors ec2 cpu utilization system"
+  actions_enabled           = var.monitoring
   insufficient_data_actions = []
   alarm_actions             = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions                = [aws_sns_topic.chips_training_db_01.arn]
@@ -44,6 +46,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_cpu75" {
   statistic                 = "Maximum"
   threshold                 = "75"
   alarm_description         = "This metric monitors ec2 cpu utilization system"
+  actions_enabled           = var.monitoring
   insufficient_data_actions = []
   alarm_actions             = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions                = [aws_sns_topic.chips_training_db_01.arn]
@@ -63,6 +66,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_root_disk_space_cri
   statistic           = "Average"
   threshold           = "90"
   alarm_description   = "The disk space average precentage is over 80% for the last 10 minutes"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
   dimensions = {
@@ -85,6 +89,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_root_disk_space_war
   statistic           = "Average"
   threshold           = "80"
   alarm_description   = "The disk space average precentage is over 80% for the last 10 minutes"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
   dimensions = {
@@ -108,6 +113,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u01_space_crit" {
   statistic           = "Average"
   threshold           = "90"
   alarm_description   = "The disk space average precentage is over 90% for the last 10 minutes"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
   dimensions = {
@@ -130,6 +136,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u01_space_warn" {
   statistic           = "Average"
   threshold           = "80"
   alarm_description   = "The disk space average precentage is over 90% for the last 10 minutes"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
   dimensions = {
@@ -153,6 +160,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u02_disk_space_crit
   statistic           = "Average"
   threshold           = "90"
   alarm_description   = "The disk space average precentage is over 90% for the last 10 minutes"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
   dimensions = {
@@ -175,6 +183,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u02_disk_space_warn
   statistic           = "Average"
   threshold           = "80"
   alarm_description   = "The disk space average precentage is over 90% for the last 10 minutes"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
   dimensions = {
@@ -189,7 +198,6 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_u02_disk_space_warn
 
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_root" {
-
   alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Exceeded (root)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -199,6 +207,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_root" {
   statistic           = "Maximum"
   threshold           = "0"
   alarm_description   = "Throughput exceeded for root volume"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
 
@@ -209,7 +218,6 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_root" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora1" {
-
   alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Exceeded (u01)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -219,6 +227,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora1" {
   statistic           = "Maximum"
   threshold           = "0"
   alarm_description   = "Throughput exceeded for volume ora1"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
 
@@ -229,7 +238,6 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora1" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora2" {
-
   alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-01 - EBS Throughput Exceeded (u02)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -239,6 +247,7 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_01_vtx_ora2" {
   statistic           = "Maximum"
   threshold           = "0"
   alarm_description   = "Throughput exceeded for volume ora2"
+  actions_enabled     = var.monitoring
   alarm_actions       = [aws_sns_topic.chips_training_db_01.arn]
   ok_actions          = [aws_sns_topic.chips_training_db_01.arn]
 
