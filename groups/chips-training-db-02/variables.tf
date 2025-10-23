@@ -201,3 +201,9 @@ variable "ora5_device_name" {
   description = "The device name for the ebs device"
   type        = string
 }
+# ----------------------------------------------------------------------
+variable "monitoring" {
+  description = "Boolean to enable/disable monitoring"
+  default     = false
+  type        = bool
+}

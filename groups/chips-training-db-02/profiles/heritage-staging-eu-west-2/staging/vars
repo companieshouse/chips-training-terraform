@@ -19,3 +19,5 @@ application_subnet_pattern = "sub-application-*"
 default_log_retention_in_days = "7"
 snapcenter = true
 db_env = ["ENVT7", "ENVT7SW"]
+
+#monitoring = true
