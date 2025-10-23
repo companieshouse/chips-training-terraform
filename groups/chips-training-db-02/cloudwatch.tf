@@ -198,7 +198,6 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_u02_disk_space_warn
 
 # --------------------------------------------------------------------------------------
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_root" {
-
   alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-02 - EBS Throughput Exceeded (root)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -219,7 +218,6 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_root" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora1" {
-
   alarm_name          = "${upper(var.environment)} - WARNING - chips-training-db-02 - EBS Throughput Exceeded (u01)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -240,7 +238,6 @@ resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora1" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "chips_training_db_02_vtx_ora2" {
-
   alarm_name          = "${upper(var.environment)} - WARMING - chips-training-db-02 - EBS Throughput Exceeded (u02)"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
